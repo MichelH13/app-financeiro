@@ -3,77 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Finance Pro | Contas</title>
+    <title>Finance Pro | MichelH13</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
     <div class="app-container">
         <header class="main-header">
-            <span class="user-welcome">Administração do Mês</span>
-            <div class="balance-section">
-                <p>Saldo em Conta</p>
+            <div class="header-top">
+                <span class="user-welcome">Olá, Michel</span>
+                <div class="header-icons">
+                    <i class="bi bi-plus-circle"></i>
+                    <i class="bi bi-gear"></i>
+                </div>
+            </div>
+            <div class="balance-card-premium">
+                <p>Saldo Disponível</p>
                 <h1 id="total-balance">R$ 0,00</h1>
             </div>
         </header>
 
         <main class="content">
-            <section class="card chart-card">
+            <h3 class="section-label">Resumo de Gastos</h3>
+            <section class="card chart-card-neon">
                 <canvas id="financeChart"></canvas>
-                <div class="chart-info">
+                <div class="chart-center">
+                    <p>Total</p>
                     <span id="chart-total">R$ 0,00</span>
-                    <p>Total Saídas</p>
+                    <p>Gastos</p>
                 </div>
             </section>
 
             <section class="history-section">
                 <div class="section-title">
                     <h3>Extrato Detalhado</h3>
-                    <button onclick="clearAllData()" class="btn-clear">Zerar Mês</button>
+                    <div class="actions">
+                        <button onclick="baixarPDF()" class="btn-icon-blue"><i class="bi bi-file-earmark-pdf"></i> PDF</button>
+                        <button onclick="clearAllData()" class="btn-icon-red"><i class="bi bi-trash"></i> Zerar</button>
+                    </div>
                 </div>
                 <div id="list" class="transaction-list"></div>
             </section>
         </main>
 
+        <button class="fab-neon" onclick="toggleModal()">Lançar <i class="bi bi-reception-4"></i></button>
+
         <div id="transaction-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-handle"></div>
                 <h2>Novo Lançamento</h2>
-                
-                <input type="text" id="desc" placeholder="Ex: Mercado Nagumo">
+                <input type="text" id="desc" placeholder="Descrição">
                 <input type="number" id="amount" placeholder="Valor R$">
-                
                 <select id="category">
                     <optgroup label="Entradas">
-                        <option value="Salario">💰 Salário Mensal</option>
-                        <option value="Dinheiro Extra">➕ Renda Extra</option>
+                        <option value="Salario">💰 Salário</option>
+                        <option value="Dinheiro Extra">➕ Extra</option>
                     </optgroup>
-                    <optgroup label="Despesas Fixas">
-                        <option value="Cartao de Credito">💳 Cartão de Crédito</option>
-                        <option value="Contas Fixas">🏠 Contas (Luz/Água)</option>
-                        <option value="Telefone">📱 Telefone/Internet</option>
-                    </optgroup>
-                    <optgroup label="Consumo">
-                        <option value="Mercado">🛒 Mercado/Compra</option>
-                        <option value="Padaria">🍞 Padaria</option>
+                    <optgroup label="Saídas">
+                        <option value="Mercado">🛒 Mercado</option>
                         <option value="Farmacia">💊 Farmácia</option>
                         <option value="Combustivel">⛽ Combustível</option>
-                        <option value="Outros">⚙️ Outros Gastos</option>
+                        <option value="Padaria">🍞 Padaria</option>
+                        <option value="Outros">⚙️ Outros</option>
                     </optgroup>
                 </select>
-
-                <button class="btn-confirm" onclick="addTransaction()">Lançar Agora</button>
-                <button class="btn-close" onclick="toggleModal()">Voltar</button>
+                <button class="btn-confirm-neon" onclick="addTransaction()">Lançar Agora</button>
+                <button class="btn-close" onclick="toggleModal()">Fechar</button>
             </div>
         </div>
-
-        <button class="fab" onclick="toggleModal()">
-            <i class="bi bi-plus-lg"></i>
-        </button>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
